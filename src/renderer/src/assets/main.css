@@ -1,0 +1,71 @@
+:root {
+  --bg: #fbfaf7;
+  --text: #1f1f1d;
+  --text-muted: #8a8a85;
+  --font-ui: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  --font-editor: 'SF Mono', ui-monospace, Menlo, monospace;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1c1c1e;
+    --text: #e8e8e3;
+    --text-muted: #8b8b86;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Draggable strip behind the macOS traffic lights. */
+.titlebar {
+  flex: none;
+  height: 44px;
+  -webkit-app-region: drag;
+}
+
+.welcome {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding-bottom: 44px;
+  text-align: center;
+}
+
+.welcome h1 {
+  margin: 0;
+  font-family: var(--font-editor);
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.welcome p {
+  margin: 0;
+  color: var(--text-muted);
+}
