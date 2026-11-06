@@ -1,9 +1,22 @@
+@import '@fontsource/ibm-plex-mono/400.css';
+@import '@fontsource/ibm-plex-mono/400-italic.css';
+@import '@fontsource/ibm-plex-mono/700.css';
+@import '@fontsource/ibm-plex-mono/700-italic.css';
+
 :root {
   --bg: #fbfaf7;
   --text: #1f1f1d;
   --text-muted: #8a8a85;
+  --text-dim: #b5b3ac;
+  --accent: #d9480f;
+  --selection: rgba(217, 72, 15, 0.18);
+  --code-bg: rgba(0, 0, 0, 0.06);
   --font-ui: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
-  --font-editor: 'SF Mono', ui-monospace, Menlo, monospace;
+  /* Placeholder font (OFL); swap this one variable to change the editor font. */
+  --font-editor: 'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace;
+  --editor-font-size: 17px;
+  --editor-line-height: 1.75;
+  --editor-measure: calc(66ch + 64px);
   color-scheme: light dark;
 }
 
@@ -12,6 +25,10 @@
     --bg: #1c1c1e;
     --text: #e8e8e3;
     --text-muted: #8b8b86;
+    --text-dim: #5d5d59;
+    --accent: #ff8a4c;
+    --selection: rgba(255, 138, 76, 0.25);
+    --code-bg: rgba(255, 255, 255, 0.08);
   }
 }
 
@@ -47,25 +64,7 @@ body {
   -webkit-app-region: drag;
 }
 
-.welcome {
+.editor {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding-bottom: 44px;
-  text-align: center;
-}
-
-.welcome h1 {
-  margin: 0;
-  font-family: var(--font-editor);
-  font-size: 28px;
-  font-weight: 500;
-}
-
-.welcome p {
-  margin: 0;
-  color: var(--text-muted);
+  min-height: 0;
 }

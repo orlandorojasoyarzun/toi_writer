@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import Editor from './editor/Editor'
 import { useI18n } from './i18n/useI18n'
 
 function App(): React.JSX.Element {
@@ -11,10 +12,7 @@ function App(): React.JSX.Element {
   return (
     <div className="app">
       <header className="titlebar" />
-      <main className="welcome">
-        <h1>{t('welcome.title')}</h1>
-        <p>{t('welcome.subtitle')}</p>
-      </main>
+      <Editor placeholder={t('editor.placeholder')} />
     </div>
   )
 }
