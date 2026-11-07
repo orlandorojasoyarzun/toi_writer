@@ -20,8 +20,8 @@ pnpm build:mac    # build a .dmg
 
 1. ~~Skeleton: window, themes, i18n (ES/EN)~~
 2. ~~Editor (CodeMirror 6), typography~~
-3. Files: open a folder, create / rename / delete, autosave ← _current_
-4. Focus and typewriter modes
+3. ~~Files: open a folder, create / rename / delete, autosave~~
+4. Focus and typewriter modes ← _current_
 5. Word count and reading time
 6. Preview and export (HTML / PDF)
 7. Polish: icon, menu, shortcuts, `.dmg`

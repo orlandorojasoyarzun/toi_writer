@@ -6,11 +6,16 @@ import { markdown, markdownLanguage } from '@codemirror/lang-markdown'
 import { editorExtensions } from './theme'
 
 interface EditorProps {
+  initialDoc: string
   placeholder: string
   onChange?: (doc: string) => void
 }
 
-function Editor({ placeholder: placeholderText, onChange }: EditorProps): React.JSX.Element {
+function Editor({
+  initialDoc,
+  placeholder: placeholderText,
+  onChange
+}: EditorProps): React.JSX.Element {
   const host = useRef<HTMLDivElement>(null)
   const view = useRef<EditorView | null>(null)
   const placeholderSlot = useRef(new Compartment())
@@ -24,6 +29,7 @@ function Editor({ placeholder: placeholderText, onChange }: EditorProps): React.
     const editor = new EditorView({
       parent: host.current!,
       state: EditorState.create({
+        doc: initialDoc,
         extensions: [
           history(),
           keymap.of([...defaultKeymap, ...historyKeymap]),
@@ -44,7 +50,8 @@ function Editor({ placeholder: placeholderText, onChange }: EditorProps): React.
       editor.destroy()
       view.current = null
     }
-    // The editor is created once; the placeholder is reconfigured below.
+    // The editor is created once per document (App remounts it via `key`); the
+    // placeholder is reconfigured below.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

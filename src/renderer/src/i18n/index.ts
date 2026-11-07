@@ -11,6 +11,7 @@ export function detectLocale(): Locale {
   return navigator.language.toLowerCase().startsWith('es') ? 'es' : 'en'
 }
 
-export function translate(locale: Locale, key: MessageKey): string {
-  return messages[locale][key]
+export function translate(locale: Locale, key: MessageKey, vars?: Record<string, string>): string {
+  const text = messages[locale][key]
+  return vars ? text.replace(/\{(\w+)\}/g, (_, name) => vars[name] ?? '') : text
 }

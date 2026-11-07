@@ -11,12 +11,16 @@
   --accent: #d9480f;
   --selection: rgba(217, 72, 15, 0.18);
   --code-bg: rgba(0, 0, 0, 0.06);
+  --panel-bg: rgba(255, 255, 255, 0.82);
+  --border: rgba(0, 0, 0, 0.1);
+  --hover: rgba(0, 0, 0, 0.06);
+  --danger: #c92a2a;
   --font-ui: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
   /* Placeholder font (OFL); swap this one variable to change the editor font. */
   --font-editor: 'IBM Plex Mono', 'SF Mono', ui-monospace, Menlo, monospace;
   --editor-font-size: 17px;
   --editor-line-height: 1.75;
-  --editor-measure: calc(66ch + 64px);
+  --editor-measure: calc(76ch + 64px);
   color-scheme: light dark;
 }
 
@@ -29,6 +33,10 @@
     --accent: #ff8a4c;
     --selection: rgba(255, 138, 76, 0.25);
     --code-bg: rgba(255, 255, 255, 0.08);
+    --panel-bg: rgba(44, 44, 46, 0.82);
+    --border: rgba(255, 255, 255, 0.12);
+    --hover: rgba(255, 255, 255, 0.08);
+    --danger: #ff6b6b;
   }
 }
 
@@ -59,9 +67,233 @@ body {
 
 /* Draggable strip behind the macOS traffic lights. */
 .titlebar {
+  position: relative;
   flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
   height: 44px;
+  padding: 0 18px;
   -webkit-app-region: drag;
+}
+
+.titlebar-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 40%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* Everything interactive inside the titlebar must opt out of dragging. */
+.library {
+  position: relative;
+  display: flex;
+  align-items: center;
+  -webkit-app-region: no-drag;
+}
+
+.library-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--text-dim);
+  transition:
+    background 0.15s,
+    transform 0.15s;
+}
+
+.library-dot:hover,
+.library-dot.open {
+  background: var(--accent);
+  transform: scale(1.2);
+}
+
+.library-panel {
+  position: absolute;
+  top: 28px;
+  right: -6px;
+  z-index: 10;
+  width: 300px;
+  max-height: min(60vh, 420px);
+  display: flex;
+  flex-direction: column;
+  padding: 6px;
+  font-size: 13px;
+  background: var(--panel-bg);
+  backdrop-filter: blur(20px) saturate(1.4);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+  animation: panel-in 0.12s ease-out;
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+.library-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 4px 6px 6px 10px;
+  color: var(--text-muted);
+}
+
+.library-folder {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+}
+
+.library-action {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 7px 10px;
+  border-radius: 7px;
+  text-align: left;
+}
+
+.library-action:hover,
+.icon-button:hover,
+.note-row:hover {
+  background: var(--hover);
+}
+
+.library-action.primary {
+  justify-content: center;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 500;
+}
+
+.library-action.primary:hover {
+  background: var(--accent);
+  filter: brightness(1.08);
+}
+
+.library-onboarding {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 10px 4px 4px;
+}
+
+.library-onboarding p,
+.library-empty {
+  margin: 0;
+  padding: 0 6px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.library-empty {
+  padding: 10px;
+}
+
+.icon-button {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  color: var(--text-muted);
+}
+
+.icon-button:hover {
+  color: var(--text);
+}
+
+.note-list {
+  margin: 4px 0 0;
+  padding: 4px 0 0;
+  overflow-y: auto;
+  list-style: none;
+  border-top: 1px solid var(--border);
+}
+
+.note-row {
+  display: flex;
+  align-items: center;
+  border-radius: 7px;
+}
+
+.note-row.current {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.note-open {
+  flex: 1;
+  min-width: 0;
+  padding: 7px 10px;
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.note-actions {
+  display: none;
+  padding-right: 4px;
+}
+
+.note-row:hover .note-actions {
+  display: flex;
+}
+
+.note-row.editing {
+  flex-direction: column;
+  align-items: stretch;
+  padding: 3px 4px;
+}
+
+.note-row.editing:hover {
+  background: none;
+}
+
+.note-input {
+  width: 100%;
+  padding: 5px 8px;
+  font: inherit;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  outline: none;
+  user-select: text;
+}
+
+.note-input[aria-invalid='true'] {
+  border-color: var(--danger);
+}
+
+.note-error {
+  padding: 4px 8px 0;
+  font-size: 11px;
+  color: var(--danger);
 }
 
 .editor {
