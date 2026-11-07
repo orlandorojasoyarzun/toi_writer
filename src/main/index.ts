@@ -1,6 +1,7 @@
 import { app, shell, BrowserWindow, nativeTheme } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
+import { registerLibraryIpc } from './library'
 
 const BACKGROUND = { light: '#fbfaf7', dark: '#1c1c1e' }
 
@@ -48,6 +49,7 @@ app.whenReady().then(() => {
     optimizer.watchWindowShortcuts(window)
   })
 
+  registerLibraryIpc()
   createWindow()
 
   app.on('activate', function () {
