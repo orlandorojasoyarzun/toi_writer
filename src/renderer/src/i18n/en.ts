@@ -10,6 +10,8 @@ export const en: Record<keyof typeof es, string> = {
   'library.changeFolder': 'Change folder',
   'library.newNote': 'New note',
   'library.empty': 'No notes yet.',
+  'view.focus': 'Sentence focus',
+  'view.typewriter': 'Typewriter',
   'note.untitled': 'Untitled',
   'note.rename': 'Rename',
   'note.delete': 'Move to Trash',

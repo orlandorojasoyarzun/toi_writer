@@ -8,6 +8,8 @@ export const es = {
   'library.changeFolder': 'Cambiar carpeta',
   'library.newNote': 'Nueva nota',
   'library.empty': 'Aún no hay notas.',
+  'view.focus': 'Foco por oración',
+  'view.typewriter': 'Máquina de escribir',
   'note.untitled': 'Sin título',
   'note.rename': 'Renombrar',
   'note.delete': 'Mover a la papelera',

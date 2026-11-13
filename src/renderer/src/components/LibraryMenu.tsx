@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useI18n } from '../i18n/context'
 import { useLibrary } from '../store/library'
+import { ViewControls } from './ViewControls'
 import { FolderIcon, PencilIcon, PlusIcon, TrashIcon } from './icons'
 
 function folderName(path: string): string {
@@ -154,6 +155,7 @@ export function LibraryMenu(): React.JSX.Element {
               </button>
             </div>
           )}
+          <ViewControls />
         </div>
       )}
     </div>
