@@ -20,11 +20,12 @@ export const editorTheme = EditorView.theme({
   '.cm-content': {
     maxWidth: 'var(--editor-measure)',
     margin: '0 auto',
-    padding: '24px 32px 40vh',
+    padding: '48px 32px 40vh',
     caretColor: 'var(--accent)',
     userSelect: 'text'
   },
   '.cm-line': { padding: '0' },
+  '.cm-dim': { opacity: '0.3', transition: 'opacity 0.2s' },
   '.cm-cursor, .cm-dropCursor': { borderLeftColor: 'var(--accent)', borderLeftWidth: '2px' },
   '.cm-placeholder': { color: 'var(--text-muted)' },
   '&.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground, .cm-selectionBackground':
